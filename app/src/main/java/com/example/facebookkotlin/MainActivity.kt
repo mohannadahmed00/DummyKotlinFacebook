@@ -2,12 +2,13 @@ package com.example.facebookkotlin
 
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import java.util.Random
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),StoryAdapter.OnStoryClickListener {
     private val NAMES = arrayOf(
         "Alice",
         "Bob",
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         storiesRecyclerView = findViewById(R.id.stories_recycler_view)
         stories = ArrayList()
         createDummyStories()
-        storiesAdapter = StoryAdapter(stories)
+        storiesAdapter = StoryAdapter(stories,this)
         storiesRecyclerView.adapter = storiesAdapter
 
 
@@ -123,5 +124,9 @@ class MainActivity : AppCompatActivity() {
     private fun getRandomNumber(max: Int): Int {
         val random = Random()
         return random.nextInt(max) + 1
+    }
+
+    override fun onStoryClick(story: StoryData, position: Int) {
+        Toast.makeText(this,"${position+1} - ${story.author}'s story",Toast.LENGTH_LONG).show()
     }
 }

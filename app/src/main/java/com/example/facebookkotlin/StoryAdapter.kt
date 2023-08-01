@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class StoryAdapter(private val list:List<StoryData>) :
+class StoryAdapter(private val list:List<StoryData>,var onStoryClickListener: OnStoryClickListener) :
     RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
 
 
@@ -30,11 +30,18 @@ class StoryAdapter(private val list:List<StoryData>) :
         holder.storyImg.backgroundTintList = ColorStateList.valueOf(Color.parseColor(story.storyColorCode))
         holder.userImg.backgroundTintList = ColorStateList.valueOf(Color.parseColor(story.userColorCode))
         holder.author.text = story.author
+        holder.storyImg.setOnClickListener {
+            onStoryClickListener.onStoryClick(story,position)
+        }
     }
 
     class StoryViewHolder(itemView: View): ViewHolder(itemView) {
         val storyImg:ImageView = itemView.findViewById(R.id.story_img)
         val userImg:ImageView = itemView.findViewById(R.id.user_img)
         val author:TextView = itemView.findViewById(R.id.author)
+    }
+
+    interface OnStoryClickListener{
+        fun onStoryClick(story:StoryData,position: Int)
     }
 }
