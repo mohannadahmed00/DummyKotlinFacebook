@@ -30,6 +30,9 @@ class StoryAdapter(private val list:List<StoryData>,var onStoryClickListener: On
         holder.storyImg.backgroundTintList = ColorStateList.valueOf(Color.parseColor(story.storyColorCode))
         holder.userImg.backgroundTintList = ColorStateList.valueOf(Color.parseColor(story.userColorCode))
         holder.author.text = story.author
+        holder.userImg.setOnClickListener {
+            onStoryClickListener.onStoryUserImgClick(story,position)
+        }
         holder.storyImg.setOnClickListener {
             onStoryClickListener.onStoryClick(story,position)
         }
@@ -43,5 +46,6 @@ class StoryAdapter(private val list:List<StoryData>,var onStoryClickListener: On
 
     interface OnStoryClickListener{
         fun onStoryClick(story:StoryData,position: Int)
+        fun onStoryUserImgClick(story:StoryData,position: Int)
     }
 }

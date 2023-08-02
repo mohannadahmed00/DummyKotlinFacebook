@@ -129,4 +129,8 @@ class MainActivity : AppCompatActivity(),StoryAdapter.OnStoryClickListener {
     override fun onStoryClick(story: StoryData, position: Int) {
         Toast.makeText(this,"${position+1} - ${story.author}'s story",Toast.LENGTH_LONG).show()
     }
+
+    override fun onStoryUserImgClick(story: StoryData, position: Int) {
+        Toast.makeText(this,"${story.author}'s profile picture",Toast.LENGTH_LONG).show()
+    }
 }
